@@ -1,72 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maksym Krasnenkyi | Portfolio</title>
     <style>
         /* Modern dark theme with shades of green */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #061f14;
-            /* Deep dark green background */
-            color: #f0fdf4;
-            /* Soft mint white text */
-            text-align: center;
-            padding: 60px 20px;
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #061f14; /* Deep dark green background */
+            color: #f0fdf4; /* Soft mint white text */
+            text-align: center; 
+            padding: 60px 20px; 
             margin: 0;
         }
-
         .container {
             max-width: 500px;
             margin: 0 auto;
         }
-
-        h1 {
+        h1 { 
             font-size: 2.2rem;
-            margin-bottom: 5px;
-            color: #4ade80;
-            /* Bright emerald green for name */
+            margin-bottom: 5px; 
+            color: #4ade80; /* Bright emerald green for name */
         }
-
-        .subtitle {
+        .subtitle { 
             font-size: 1.1rem;
-            color: #86efac;
-            /* Muted light green for subtitle */
-            margin-bottom: 35px;
+            color: #86efac; /* Muted light green for subtitle */
+            margin-bottom: 35px; 
         }
-
         /* Buttons stylized with dark green slate */
-        .btn {
-            display: block;
-            padding: 16px;
-            margin: 16px auto;
-            background: #0b2e1e;
-            /* Medium dark green for buttons */
-            color: #f0fdf4;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            border: 1px solid #166534;
-            /* Forest green border */
-            transition: all 0.3s ease;
+        .btn { 
+            display: block; 
+            width: 100%;
+            box-sizing: border-box;
+            padding: 16px; 
+            margin: 16px auto; 
+            background: #0b2e1e; /* Medium dark green for buttons */
+            color: #f0fdf4; 
+            text-decoration: none; 
+            border-radius: 12px; 
+            font-weight: 600; 
+            border: 1px solid #166534; /* Forest green border */
+            font-size: 1rem;
+            transition: all 0.3s ease; 
         }
-
         /* Hover effect with vibrant neon green */
-        .btn:hover {
-            background: #22c55e;
-            /* Vibrant green on hover */
-            color: #061f14;
-            /* Dark text on hover for contrast */
+        .btn:hover { 
+            background: #22c55e; /* Vibrant green on hover */
+            color: #061f14; /* Dark text on hover for contrast */
             transform: translateY(-2px);
             border-color: #22c55e;
-            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.2);
-            /* Soft green glow */
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.2); /* Soft green glow */
+            cursor: pointer;
         }
     </style>
 </head>
-
 <body>
 
     <div class="container">
@@ -76,37 +64,45 @@
 
         <!-- Portfolio Links -->
         <a href="https://mkbuild.uk/" class="btn" target="_blank">🌐 Website for a builder</a>
-
-        <a href="https://materials-calculator.onrender.com/" class="btn" target="_blank">🧮 Sheet Cutting Calculator
-            (Python)</a>
-
+        
+        <a href="https://materials-calculator.onrender.com/" class="btn" target="_blank">🧮 Sheet Cutting Calculator (Python)</a>
+        
         <a href="https://github.com/maksymkrasnenkyi2009-ui" class="btn" target="_blank">💻 GitHub Profile</a>
-
+        
         <a href="https://wa.me/447467597683" class="btn" target="_blank">💬 WhatsApp</a>
 
-        <!-- Smart Email Button for iPhone & PC -->
-        <a href="#" class="btn" id="emailBtn">✉️ Email</a>
-        
-        <script>
-            document.getElementById('emailBtn').addEventListener('click', function (e) {
-                e.preventDefault();
-
-                var email = 'maksymkrasnenkyi2009@gmail.com';
-
-                // Check if the user is on an iOS device (iPhone/iPad) or Mac
-                var isApple = /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent);
-
-                if (isApple) {
-                    // Opens default Apple Mail app
-                    window.location.href = 'mailto:' + email;
-                } else {
-                    // Opens Gmail in browser for Windows/Android
-                    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + email, '_blank');
-                }
-            });
-        </script>
+        <!-- Interactive Copy Email Button (Works perfectly on Samsung, iPhone & PC) -->
+        <button class="btn" id="emailBtn">
+            ✉️ Email: maksymkrasnenkyi2009@gmail.com
+        </button>
     </div>
 
-</body>
+    <script>
+        // Smooth Clipboard Copy Script
+        document.getElementById('emailBtn').addEventListener('click', function() {
+            var email = 'maksymkrasnenkyi2009@gmail.com';
+            
+            navigator.clipboard.writeText(email).then(function() {
+                var btn = document.getElementById('emailBtn');
+                var originalText = btn.innerHTML;
+                
+                // Visual feedback when copied
+                btn.innerHTML = '✅ Copied to clipboard!';
+                btn.style.background = '#22c55e';
+                btn.style.color = '#061f14';
+                
+                // Reset button back to normal after 2 seconds
+                setTimeout(function() {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '#0b2e1e';
+                    btn.style.color = '#f0fdf4';
+                }, 2000);
+            }).catch(function() {
+                // Emergency alert backup if the browser blocks clipboard access
+                alert('Email: ' + email);
+            });
+        });
+    </script>
 
+</body>
 </html>
